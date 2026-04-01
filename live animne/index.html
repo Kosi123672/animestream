@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>AnimeStream - Live Streaming + Upload Video (IndexedDB)</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="loader-wrapper" id="loaderWrapper">
+    <div class="loader">
+        <div class="spinner"></div>
+        <p>Memuat AnimeStream dengan IndexedDB...</p>
+    </div>
+</div>
+
+<nav class="navbar">
+    <div class="logo" id="logo">
+        <i class="fas fa-database"></i> 
+        <span>AnimeStream<span style="color:#ffb347;">.live</span></span>
+    </div>
+    <div class="search-container">
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Cari video...">
+            <button id="searchBtn"><i class="fas fa-search"></i> Cari</button>
+        </div>
+    </div>
+    <div style="display: flex; gap: 10px;">
+        <div class="storage-info" id="storageInfo">
+            <i class="fas fa-database"></i> Memuat...
+        </div>
+        <button class="upload-btn" id="uploadBtn">
+            <i class="fas fa-upload"></i> Upload Video
+        </button>
+    </div>
+</nav>
+
+<div class="container">
+    <!-- Live Player -->
+    <div class="live-section" data-aos="fade-up">
+        <div class="player-title">
+            <div>
+                <i class="fas fa-play-circle" style="color:#ff4d6d;"></i> 
+                <span id="currentPlayingTitle">NOW PLAYING</span>
+                <span class="live-badge"><i class="fas fa-circle" style="font-size: 0.6rem;"></i> LIVE</span>
+            </div>
+        </div>
+        <div class="video-wrapper">
+            <video id="mainPlayer" controls style="width:100%; aspect-ratio:16/9; background: #000; border-radius: 24px;">
+                <source src="" type="video/mp4">
+                <p>Browser Anda tidak mendukung pemutaran video.</p>
+            </video>
+        </div>
+    </div>
+
+    <!-- Category Tabs -->
+    <div class="category-tabs" id="categoryTabs"></div>
+
+    <!-- Video Grid -->
+    <div class="section-header">
+        <h2><i class="fas fa-video"></i> Koleksi Video</h2>
+        <span style="font-size: 0.8rem;" id="resultCount"></span>
+    </div>
+    <div id="videoGridContainer" class="video-grid"></div>
+</div>
+
+<footer>
+    <i class="fas fa-database"></i> Video disimpan di IndexedDB • Kapasitas hingga 500MB+ • Upload video sendiri
+</footer>
+
+<!-- Modal Upload -->
+<div class="modal" id="uploadModal">
+    <div class="modal-content">
+        <h2><i class="fas fa-upload"></i> Upload Video Baru</h2>
+        <form id="uploadForm">
+            <div class="form-group">
+                <label>Judul Video *</label>
+                <input type="text" id="videoTitle" required placeholder="Masukkan judul video">
+            </div>
+            <div class="form-group">
+                <label>Kategori</label>
+                <select id="videoCategory">
+                    <option value="anime">Anime</option>
+                    <option value="action">Action</option>
+                    <option value="fantasy">Fantasy</option>
+                    <option value="romance">Romance</option>
+                    <option value="movie">Movie</option>
+                    <option value="other">Lainnya</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Deskripsi</label>
+                <textarea id="videoDescription" placeholder="Deskripsi video..."></textarea>
+            </div>
+            <div class="form-group">
+                <label>File Video (MP4, WebM, OGG) *</label>
+                <input type="file" id="videoFile" accept="video/*" required>
+                <small style="color: #aaa;">Maksimal 500MB (IndexedDB mendukung file besar)</small>
+            </div>
+            <div class="form-group">
+                <label>Thumbnail (opsional)</label>
+                <input type="file" id="thumbnailFile" accept="image/*">
+            </div>
+            <div class="progress-bar" id="progressBar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="modal-buttons">
+                <button type="button" class="btn-cancel" id="cancelUpload">Batal</button>
+                <button type="submit" class="btn-submit" id="submitUpload">Upload Video</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Scripts -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="js/database.js"></script>
+<script src="js/upload.js"></script>
+<script src="js/player.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
